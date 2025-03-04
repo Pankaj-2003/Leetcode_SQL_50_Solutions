@@ -19,3 +19,4 @@ SELECT unique_id, name FROM Employees LEFT JOIN EmployeeUNI ON Employees.id = Em
 
 -- q7 
 
+select product_name , year, price from Sales join Product on Sales.product_id = Product.product_id
