@@ -19,4 +19,10 @@ SELECT unique_id, name FROM Employees LEFT JOIN EmployeeUNI ON Employees.id = Em
 
 -- q7 
 
-select product_name , year, price from Sales join Product on Sales.product_id = Product.product_id
+select product_name , year, price from Sales join Product on Sales.product_id = Product.product_id;
+
+
+-- q8 
+SELECT customer_id  , count(*) as count_no_trans
+FROM Visits
+LEFT JOIN Transactions ON Visits.visit_id = Transactions.visit_id where transaction_id is null group by customer_id
