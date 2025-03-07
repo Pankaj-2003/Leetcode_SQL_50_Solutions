@@ -25,4 +25,8 @@ select product_name , year, price from Sales join Product on Sales.product_id = 
 -- q8 
 SELECT customer_id  , count(*) as count_no_trans
 FROM Visits
-LEFT JOIN Transactions ON Visits.visit_id = Transactions.visit_id where transaction_id is null group by customer_id
+LEFT JOIN Transactions ON Visits.visit_id = Transactions.visit_id where transaction_id is null group by customer_id;
+
+
+-- q9 
+SELECT w1.id FROM Weather w1 JOIN Weather w2 ON DATEDIFF(w1.recordDate, w2.recordDate) = 1 WHERE w1.temperature > w2.temperature;
