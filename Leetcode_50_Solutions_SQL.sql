@@ -30,3 +30,34 @@ LEFT JOIN Transactions ON Visits.visit_id = Transactions.visit_id where transact
 
 -- q9 
 SELECT w1.id FROM Weather w1 JOIN Weather w2 ON DATEDIFF(w1.recordDate, w2.recordDate) = 1 WHERE w1.temperature > w2.temperature;
+
+-- q10 
+SELECT 
+    machine_id,
+    round(AVG(duration),3) AS processing_time 
+FROM (
+    SELECT 
+        machine_id,
+        process_id,
+        (end_time - start_time) AS duration
+    FROM (
+        SELECT 
+            machine_id,
+            process_id,
+            MAX(CASE WHEN activity_type = 'start' THEN timestamp END) AS start_time,
+            MAX(CASE WHEN activity_type = 'end' THEN timestamp END) AS end_time
+        FROM Activity
+        GROUP BY machine_id, process_id
+    ) t1
+) t2
+GROUP BY machine_id;
+
+
+-- q11
+select name , bonus from Employee left join Bonus on Employee.empId = Bonus.empId where bonus < 1000 or bonus is null;
+
+-- q12
+
+select Students.student_id , Students.student_name , Subjects.subject_name , count(Examinations.subject_name) as attended_exams  from Students cross join Subjects left join Examinations on Examinations.student_id = Students.student_id and Examinations.subject_name = Subjects.subject_name group by student_id , student_name , subject_name order by Students.student_id , Subjects.subject_name
+
+
