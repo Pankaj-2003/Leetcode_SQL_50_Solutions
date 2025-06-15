@@ -60,4 +60,14 @@ select name , bonus from Employee left join Bonus on Employee.empId = Bonus.empI
 
 select Students.student_id , Students.student_name , Subjects.subject_name , count(Examinations.subject_name) as attended_exams  from Students cross join Subjects left join Examinations on Examinations.student_id = Students.student_id and Examinations.subject_name = Subjects.subject_name group by student_id , student_name , subject_name order by Students.student_id , Subjects.subject_name
 
+-- q13
+select name from Employee where id in (select managerID from employee group by managerId having count(ManagerId)>=5)
+
+
+-- q14
+select user_id , round(sum(con_count)/count(user_id),2) as confirmation_rate from (select Signups.user_id,
+case when action = 'confirmed' then 1
+else 0
+end as con_count
+from Signups left join Confirmations on Signups.user_id = Confirmations.user_id) as sub_table group by user_id;
 
